@@ -1,0 +1,50 @@
+---
+title: "data-analysis-replication"
+output: html_document
+---
+
+```{R}
+library(tidyverse)
+library(dplyr)
+#Loading in data set
+d <- read_csv(file="~/Desktop/rumiqolqa.csv")
+d
+```
+
+```{R}
+#Means of K measurements from fresh and weathered samples
+kf <- mean(d$`K fresh`)
+kw <- mean(d$`K weathered`)
+kf
+kw
+```
+```{R}
+#SD of K measurements from fresh and weathered samples
+kfsd <- sd(d$`K fresh`)
+kwsd <- sd(d$`K weathered`)
+kfsd
+kwsd
+```
+```{R}
+#T-test for K
+x <- d$`K fresh` - d$`K weathered`
+n <- length(x)
+t.test(d$`K fresh`, d$`K weathered`, df = n - 1, alternative = "two.sided", paired = TRUE)
+```
+```{R}
+#F test for K
+x <- d$`K fresh`
+y <- d$`K weathered`
+vt <- var.test(x, y)
+vt
+```
+
+```{R}
+library(ggplot2)
+library(gridExtra)
+```
+```{R}
+#Making bivariate plot displaying readings of K from weathered and fresh surfaces
+gg <- ggplot(data = d, aes(x = `K fresh`, y = `K weathered`)) + geom_point() + geom_smooth(method = "lm", se = FALSE, formula = y ~ x)
+gg
+```

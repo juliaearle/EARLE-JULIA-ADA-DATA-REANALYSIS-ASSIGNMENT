@@ -2,19 +2,21 @@
 title: "data-analysis-replication"
 output: html_document
 ---
+## Introduction: This paper seeks to develop a method for the determination of Inka building stones' geological provenances using portable x-ray fluorescence (pXRF) spectrometry. Ogburn et al. present pXRF readings taken on weathered and fresh samples of stone to determine the degree of contamination on weathered samples as compared with fresh ones. The authors seek to determine whether archaeologists can reliably use pXRF readings of building stone surfaces to compare with geological samples, or whether the contamination of the exterior surface interferes with the results of analysis.
 
+## Visualization of Data: This paper includes mean, standard deviation, t-test, and f-test analyses of the data obtained from the pXRF readings. There are also bivariate plots of the readings for each element, comparing between materials from the Rumiqolqa and Huaccoto quarries. Using the data sets for the Rumiqolqa and Huaccoto materials, I will determine the mean and standard deviation of the Rumiqoqla set, in addition to performing a t- and f-test on the data. I will then re-create a bivariate plot with the readings for K on weathered and fresh samples of Rumiqolqa and Huaccoto materials.
 ```{R}
 library(tidyverse)
 library(dplyr)
 #Loading Rumiqolqa data set
 rumi <- read_csv(file="~/DEVELOPMENT/HOMEWORK/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/rumiqolqa.csv")
-rumi
+head(rumi)
 ```
 
 ```{R}
 #Loading Huaccoto data set
 huac <- read_csv(file="~/DEVELOPMENT/HOMEWORK/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/huaccoto.csv")
-huac
+head(huac)
 ```
 ```{R}
 #Means of K measurements from fresh and weathered samples
@@ -23,6 +25,7 @@ kw <- mean(rumi$`K weathered`)
 kf
 kw
 ```
+## Replications/Reanalysis
 ```{R}
 #SD of K measurements from fresh and weathered samples
 kfsd <- sd(rumi$`K fresh`)
@@ -56,4 +59,3 @@ ggplot(kh, aes(x,y)) + geom_point() + geom_point(data=kr, colour='red') + xlim(1
 ```
 
 <img src="img/ogburn-k.png" width="500px"/>
-

@@ -6,35 +6,40 @@ output: html_document
 ```{R}
 library(tidyverse)
 library(dplyr)
-#Loading in data set
-d <- read_csv(file="~/Desktop/rumiqolqa.csv")
-d
+#Loading Rumiqolqa data set
+rumi <- read_csv(file="~/DEVELOPMENT/HOMEWORK/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/rumiqolqa.csv")
+rumi
 ```
 
 ```{R}
+#Loading Huaccoto data set
+huac <- read_csv(file="~/DEVELOPMENT/HOMEWORK/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/EARLE-JULIA-ADA-DATA-REANALYSIS-ASSIGNMENT/huaccoto.csv")
+huac
+```
+```{R}
 #Means of K measurements from fresh and weathered samples
-kf <- mean(d$`K fresh`)
-kw <- mean(d$`K weathered`)
+kf <- mean(rumi$`K fresh`)
+kw <- mean(rumi$`K weathered`)
 kf
 kw
 ```
 ```{R}
 #SD of K measurements from fresh and weathered samples
-kfsd <- sd(d$`K fresh`)
-kwsd <- sd(d$`K weathered`)
+kfsd <- sd(rumi$`K fresh`)
+kwsd <- sd(rumi$`K weathered`)
 kfsd
 kwsd
 ```
 ```{R}
 #T-test for K
-x <- d$`K fresh` - d$`K weathered`
+x <- rumi$`K fresh` - rumi$`K weathered`
 n <- length(x)
-t.test(d$`K fresh`, d$`K weathered`, df = n - 1, alternative = "two.sided", paired = TRUE)
+t.test(rumi$`K fresh`, rumi$`K weathered`, df = n - 1, alternative = "two.sided", paired = TRUE)
 ```
 ```{R}
 #F test for K
-x <- d$`K fresh`
-y <- d$`K weathered`
+x <- rumi$`K fresh`
+y <- rumi$`K weathered`
 vt <- var.test(x, y)
 vt
 ```
@@ -45,6 +50,7 @@ library(gridExtra)
 ```
 ```{R}
 #Making bivariate plot displaying readings of K from weathered and fresh surfaces
-gg <- ggplot(data = d, aes(x = `K fresh`, y = `K weathered`)) + geom_point() + geom_smooth(method = "lm", se = FALSE, formula = y ~ x)
-gg
+kh = data.frame(x = huac$`K fresh`, y = huac$`K weathered`)
+kr = data.frame(x = rumi$`K fresh`,y = rumi$`K weathered`)
+ggplot(kh, aes(x,y)) + geom_point() + geom_point(data=kr, colour='red') + xlim(15000, 60000) + ylim(15000, 60000)
 ```

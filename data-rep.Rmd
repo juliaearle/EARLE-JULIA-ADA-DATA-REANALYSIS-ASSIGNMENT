@@ -2,6 +2,12 @@
 title: "data-analysis-replication"
 output: html_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.path = "img/")
+```
+
 ## Introduction
 # This paper seeks to develop a method for the determination of Inka building stones' geological provenances using portable x-ray fluorescence (pXRF) spectrometry. Ogburn et al. present pXRF readings taken on weathered and fresh samples of stone to determine the degree of contamination on weathered samples as compared with fresh ones. The authors seek to determine whether archaeologists can reliably use pXRF readings of building stone surfaces to compare with geological samples, or whether the contamination of the exterior surface interferes with the results of analysis.
 

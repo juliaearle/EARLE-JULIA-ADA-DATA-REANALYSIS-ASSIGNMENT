@@ -54,3 +54,6 @@ kh = data.frame(x = huac$`K fresh`, y = huac$`K weathered`)
 kr = data.frame(x = rumi$`K fresh`,y = rumi$`K weathered`)
 ggplot(kh, aes(x,y)) + geom_point() + geom_point(data=kr, colour='red') + xlim(15000, 60000) + ylim(15000, 60000)
 ```
+
+<img src="img/ogburn-k.png" width="500px"/>
+
